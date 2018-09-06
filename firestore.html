@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase.js"></script>
+  <script>
+    var config = {
+      apiKey: "AIzaSyDgUZW9bkYiWCbqVrvaV6AsdlVFAmAl-Kw",
+      authDomain: "soundrenaline18.firebaseapp.com",
+      databaseURL: "https://soundrenaline18.firebaseio.com",
+      projectId: "soundrenaline18",
+      storageBucket: "soundrenaline18.appspot.com",
+      messagingSenderId: "247431289346"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script>
+    firebase.firestore().settings({ timestampsInSnapshots: true });
+    const changeImgUrl = async () => {
+      const { docs: artists } = await firebase.firestore().collection('artists').get();
+
+      await Promise.all(artists.map(async artist => {
+        const data = artist.data();
+        const downloadUrl = await firebase.storage().refFromURL(data.imgUrl).getDownloadURL();
+        const artistObj = {
+          ...data,
+          imgUrl: downloadUrl
+        };
+        await firebase.firestore().collection('artists').doc(artist.id).set(artistObj, { merge: true })
+
+        return artistObj;
+      }));
+    }
+    changeImgUrl();
+  </script>
+</body>
+
+</html>
