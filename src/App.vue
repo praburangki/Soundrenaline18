@@ -1,8 +1,13 @@
 <template>
   <v-app>
-    <v-toolbar app>
-      <v-toolbar-title>Soundrenaline 2018</v-toolbar-title>
+    <v-toolbar app extended color="primary" dark>
       <v-spacer></v-spacer>
+      <v-toolbar-title class="appTitle">Soundrenaline 2018</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <div slot="extension" class="navLinks">
+        <v-btn flat slot="extension">SCHEDULE</v-btn>
+        <v-btn flat slot="extension">Line UP</v-btn>
+      </div>
     </v-toolbar>
     <v-content>
       <router-view/>
@@ -23,3 +28,14 @@ export default {
   }
 };
 </script>
+
+<style lang="stylus" scoped>
+.appTitle {
+  font-family: 'Product Sans';
+  text-transform: uppercase;
+}
+
+.navLinks {
+  margin: 0 auto;
+}
+</style>
