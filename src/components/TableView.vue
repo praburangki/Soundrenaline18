@@ -93,9 +93,7 @@
               <div
                 v-for="(header, idx) in headers" :key="`header-${idx}`"
                 class="stage"
-                :style="{
-                  backgroundColor: `${isFirstDay ? '#26a27c' : '#3C8BAD'}`
-                }"
+                :class="isFirstDay ? 'info' : 'success'"
                 >
                 {{ header }}
               </div>
@@ -126,9 +124,9 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import { fifteen } from "@/helpers/times";
-import ArtistsColumn from "./ArtistsColumn";
+import { mapGetters } from 'vuex';
+import { fifteen } from '@/helpers/times';
+import ArtistsColumn from './ArtistsColumn';
 
 export default {
   components: {
@@ -136,12 +134,12 @@ export default {
   },
   data: () => ({
     headers: [
-      "A Stage",
-      "Platinum",
-      "Slim Refined",
-      "Creators",
-      "Camp",
-      "Thunderdome"
+      'A Stage',
+      'Platinum',
+      'Slim Refined',
+      'Creators',
+      'Camp',
+      'Thunderdome'
     ],
     times: []
   }),
@@ -150,18 +148,18 @@ export default {
       return this.$store.state.selectedDay === 1;
     },
     ...mapGetters([
-      "aStage1",
-      "aStage2",
-      "platinumStage1",
-      "platinumStage2",
-      "slimStage1",
-      "slimStage2",
-      "creatorsStage1",
-      "creatorsStage2",
-      "campStage1",
-      "campStage2",
-      "thunderdome1",
-      "thunderdome2"
+      'aStage1',
+      'aStage2',
+      'platinumStage1',
+      'platinumStage2',
+      'slimStage1',
+      'slimStage2',
+      'creatorsStage1',
+      'creatorsStage2',
+      'campStage1',
+      'campStage2',
+      'thunderdome1',
+      'thunderdome2'
     ])
   },
   mounted() {

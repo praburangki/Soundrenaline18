@@ -21,31 +21,13 @@
           </v-tab>
 
           <v-tab-item id="table">
-            <div class="mt-2 text-xs-center">
-              <v-btn 
-                round
-                color="#26a27c"
-                dark
-                @click="changeDay(1)"
-                :outline="!isFirstDay">
-                day 1
-              </v-btn>
-              <v-btn 
-                round
-                color="#3C8BAD"
-                dark
-                @click="changeDay(2)"
-                :outline="isFirstDay">
-                day 2
-              </v-btn>
-            </div>
+            <BtnDaySwitcher />
             <TableView />
           </v-tab-item>
 
           <v-tab-item id="list">
-            <v-card flat>
-              <v-card-text>list</v-card-text>
-            </v-card>
+            <BtnDaySwitcher />
+            <ListView />
           </v-tab-item>
 
           <v-tab-item id="favorite">
@@ -61,23 +43,17 @@
 
 <script>
 import TableView from '@/components/TableView';
+import ListView from '@/components/ListView';
+import BtnDaySwitcher from '@/components/BtnDaySwitcher';
 
 export default {
   components: {
-    TableView
+    TableView,
+    ListView,
+    BtnDaySwitcher
   },
   created() {
     this.$store.dispatch('fetchArtists');
-  },
-  computed: {
-    isFirstDay() {
-      return this.$store.state.selectedDay === 1;
-    }
-  },
-  methods: {
-    changeDay(day) {
-      this.$store.commit('changeDay', { day });
-    }
   }
 };
 </script>

@@ -35,10 +35,10 @@
       v-for="artist in artists" :key="artist.id"
       :style="{ 
         top: `${26 * artist.height}px`, 
-        height: `${26 * artist.rowSpan}px`,
-        background: `${isFirstDay ? '#26a27c' : '#3C8BAD'}`
+        height: `${26 * artist.rowSpan}px`
       }"
-      class="band">
+      class="band"
+      :class="isFirstDay ? 'info' : 'success'">
       <div>{{ artist.name }}</div>
       <div>{{ artist.startsAt | formatTime }} - {{ artist.endsAt | formatTime }}</div>
     </div>
