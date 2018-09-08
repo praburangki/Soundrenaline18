@@ -8,6 +8,7 @@ import {
   VGrid,
   VToolbar,
   VList,
+  VChip,
   VTabs,
   VCard,
   transitions
@@ -23,6 +24,7 @@ Vue.use(Vuetify, {
     VGrid,
     VToolbar,
     VList,
+    VChip,
     VTabs,
     VCard,
     transitions

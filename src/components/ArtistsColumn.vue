@@ -18,7 +18,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: solid 1px #fff;
 
     div:first-child {
       font-weight: bold;
@@ -35,10 +34,12 @@
       v-for="artist in artists" :key="artist.id"
       :style="{ 
         top: `${26 * artist.height}px`, 
-        height: `${26 * artist.rowSpan}px`
+        height: `${26 * artist.rowSpan}px`,
+        border: `solid 1px #fff !important`
       }"
       class="band"
-      :class="isFirstDay ? 'info' : 'success'">
+      :class="artist.isFav ? 'primary' : isFirstDay ? 'info' : 'success'"
+      @click="handleClick(artist)">
       <div>{{ artist.name }}</div>
       <div>{{ artist.startsAt | formatTime }} - {{ artist.endsAt | formatTime }}</div>
     </div>
@@ -53,6 +54,11 @@ export default {
   filters: {
     formatTime(time) {
       return parseTime(time);
+    }
+  },
+  methods: {
+    handleClick(artist) {
+      this.$store.dispatch('toggleFav', { artist });
     }
   },
   computed: {

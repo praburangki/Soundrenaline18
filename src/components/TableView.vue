@@ -1,6 +1,7 @@
 <style lang="stylus" scoped>
 .cardContainer {
   padding: 16px 3px;
+  font-family: 'Product Sans';
 }
 
 .plannerContainer {

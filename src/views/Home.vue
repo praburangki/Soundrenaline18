@@ -51,9 +51,6 @@ export default {
     TableView,
     ListView,
     BtnDaySwitcher
-  },
-  created() {
-    this.$store.dispatch('fetchArtists');
   }
 };
 </script>

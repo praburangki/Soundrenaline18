@@ -53,55 +53,55 @@ export default new Vuex.Store({
     artists: []
   },
   getters: {
-    day1: state => {
-      return filterArtist(state.artists);
-    },
-    day2: state => {
-      return filterArtist(state.artists, false);
-    },
-    aStage1: (_, getters) => {
-      return filterStage(getters.day1, A_STAGE);
-    },
-    aStage2: (_, getters) => {
-      return filterStage(getters.day2, A_STAGE);
-    },
-    platinumStage1: (_, getters) => {
-      return filterStage(getters.day1, P_STAGE);
-    },
-    platinumStage2: (_, getters) => {
-      return filterStage(getters.day2, P_STAGE);
-    },
-    slimStage1: (_, getters) => {
-      return filterStage(getters.day1, SLIM_STAGE);
-    },
-    slimStage2: (_, getters) => {
-      return filterStage(getters.day2, SLIM_STAGE);
-    },
-    creatorsStage1: (_, getters) => {
-      return filterStage(getters.day1, CRE_STAGE);
-    },
-    creatorsStage2: (_, getters) => {
-      return filterStage(getters.day2, CRE_STAGE);
-    },
-    campStage1: (_, getters) => {
-      return filterStage(getters.day1, CAMP_STAGE);
-    },
-    campStage2: (_, getters) => {
-      return filterStage(getters.day2, CAMP_STAGE);
-    },
-    thunderdome1: (_, getters) => {
-      return filterStage(getters.day1, T_STAGE);
-    },
-    thunderdome2: (_, getters) => {
-      return filterStage(getters.day2, T_STAGE);
-    }
+    favArtists: state =>
+      state.artists
+        .filter(artist => artist.isFav)
+        .sort((elemA, elemB) => elemA.startsAt - elemB.startsAt),
+    day1: state => filterArtist(state.artists),
+    day2: state => filterArtist(state.artists, false),
+    aStage1: (_, getters) => filterStage(getters.day1, A_STAGE),
+    aStage2: (_, getters) => filterStage(getters.day2, A_STAGE),
+    platinumStage1: (_, getters) => filterStage(getters.day1, P_STAGE),
+    platinumStage2: (_, getters) => filterStage(getters.day2, P_STAGE),
+    slimStage1: (_, getters) => filterStage(getters.day1, SLIM_STAGE),
+    slimStage2: (_, getters) => filterStage(getters.day2, SLIM_STAGE),
+    creatorsStage1: (_, getters) => filterStage(getters.day1, CRE_STAGE),
+    creatorsStage2: (_, getters) => filterStage(getters.day2, CRE_STAGE),
+    campStage1: (_, getters) => filterStage(getters.day1, CAMP_STAGE),
+    campStage2: (_, getters) => filterStage(getters.day2, CAMP_STAGE),
+    thunderdome1: (_, getters) => filterStage(getters.day1, T_STAGE),
+    thunderdome2: (_, getters) => filterStage(getters.day2, T_STAGE)
   },
   mutations: {
     setArtists(state, { artists }) {
       state.artists = artists;
     },
+    setFavArtists(state) {
+      const favIds = [];
+      const localFav = (
+        JSON.parse(localStorage.getItem('favArtists')) || []
+      ).map(artist => {
+        artist.startsAt = new Date(artist.startsAt);
+        artist.endsAt = new Date(artist.endsAt);
+
+        favIds.push(artist.id);
+
+        return artist;
+      });
+      const filterArt = state.artists.filter(el => {
+        return !favIds.includes(el.id);
+      });
+      state.artists = [...filterArt, ...localFav];
+    },
     changeDay(state, { day }) {
       state.selectedDay = day;
+    },
+    toggleFavArtist(state, { artist }) {
+      const isFav = !artist.isFav;
+      state.artists = [
+        ...state.artists.filter(item => item.id !== artist.id),
+        { ...artist, isFav }
+      ];
     }
   },
   actions: {
@@ -126,6 +126,11 @@ export default new Vuex.Store({
         };
       });
       commit('setArtists', { artists });
+    },
+    toggleFav({ commit, getters }, { artist }) {
+      commit('toggleFavArtist', { artist });
+      const { favArtists } = getters;
+      localStorage.setItem('favArtists', JSON.stringify(favArtists));
     }
   }
 });

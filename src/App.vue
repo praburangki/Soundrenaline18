@@ -20,9 +20,9 @@
         <v-tab href="#favorite">
           <v-icon>favorite</v-icon>
         </v-tab>
-        <v-tab href="#pictures">
+        <!-- <v-tab href="#pictures">
           <v-icon>photo</v-icon>
-        </v-tab>
+        </v-tab> -->
       </v-tabs>
     </v-toolbar>
 
@@ -39,36 +39,25 @@
         </v-tab-item>
 
         <v-tab-item id="favorite" lazy>
-          <v-card flat>
-            <v-card-text>favorite</v-card-text>
-          </v-card>
+          <FavoriteView />
         </v-tab-item>
       </v-tabs-items>
     </v-content>
-    <v-footer class="justify-center py-2" fixed height="60">
-      <div>
-        <v-btn color="primary">
-          info
-          <v-icon right dark>info</v-icon>
-        </v-btn>
-      </div>
-    </v-footer>
   </v-app>
 </template>
 
 <script>
 import TableView from '@/components/TableView';
 import ListView from '@/components/ListView';
+import FavoriteView from '@/components/FavoriteView';
 import BtnDaySwitcher from '@/components/BtnDaySwitcher';
 
 export default {
   components: {
     TableView,
     ListView,
+    FavoriteView,
     BtnDaySwitcher
-  },
-  created() {
-    this.$store.dispatch('fetchArtists');
   },
   data() {
     return {

@@ -10,5 +10,10 @@ Vue.config.productionTip = false;
 
 new Vue({
   store,
-  render: h => h(App)
+  render: h => h(App),
+  created() {
+    store.dispatch('fetchArtists').then(() => {
+      store.commit('setFavArtists');
+    });
+  }
 }).$mount('#app');
