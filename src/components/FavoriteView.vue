@@ -17,6 +17,7 @@
           Pilih siapa yang ingin kamu lihat supaya lebih mudah untuk mengikuti jadwal artis favoritmu!
           <br>
           <br>
+          Kamu bisa pilih pada tabel di bagian pertama.
           Silahkan balik kesini lagi setelah memilih.
         </div>
         <div v-else>

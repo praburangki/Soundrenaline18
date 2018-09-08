@@ -27,7 +27,7 @@
     </v-toolbar>
 
     <v-content class="mb-5">
-      <v-tabs-items v-model="tabModel">
+      <v-tabs-items v-model="tabModel" touchless>
         <v-tab-item id="table" lazy>
           <BtnDaySwitcher />
           <TableView />
