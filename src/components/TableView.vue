@@ -141,8 +141,7 @@ export default {
       'Creators',
       'Camp',
       'Thunderdome'
-    ],
-    times: []
+    ]
   }),
   computed: {
     isFirstDay() {
@@ -161,10 +160,10 @@ export default {
       'campStage2',
       'thunderdome1',
       'thunderdome2'
-    ])
-  },
-  mounted() {
-    this.times = fifteen();
+    ]),
+    times() {
+      return fifteen();
+    }
   }
 };
 </script>

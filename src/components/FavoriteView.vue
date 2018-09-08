@@ -44,7 +44,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import DailyFavorite from './DailyFavorite';
-const firstDay = artist => artist.startsAt < new Date('2018-09-09 08:00');
+const firstDay = artist => artist.startsAt < new Date('2018/09/09 08:00');
 
 export default {
   components: {

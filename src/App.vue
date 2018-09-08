@@ -20,9 +20,6 @@
         <v-tab href="#favorite">
           <v-icon>favorite</v-icon>
         </v-tab>
-        <!-- <v-tab href="#pictures">
-          <v-icon>photo</v-icon>
-        </v-tab> -->
       </v-tabs>
     </v-toolbar>
 

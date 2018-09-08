@@ -12,11 +12,11 @@ const CRE_STAGE = 'Creators Stage';
 const CAMP_STAGE = 'Camp Stage';
 const T_STAGE = 'Thunderdome';
 
-const isFirstDay = new Date() <= new Date('2018-09-08 24:00');
+const isFirstDay = new Date() <= new Date('2018/09/09 1:00');
 
 const filterArtist = (artists, isAfter = true) =>
   artists.filter(artist => {
-    const firstDay = artist.startsAt < new Date('2018-09-09 08:00');
+    const firstDay = artist.startsAt < new Date('2018/09/09 08:00');
     return isAfter ? firstDay : !firstDay;
   });
 
@@ -28,12 +28,12 @@ const handleTimes = (startsAt, endsAt) => {
   const hours = startsAt.getHours();
   const date = startsAt.getDate();
 
-  let height = differenceInMinutes(startsAt, new Date(`2018-09-${date} 15:00`));
+  let height = differenceInMinutes(startsAt, new Date(`2018/09/${date} 15:00`));
 
   if (hours === 0) {
     height = differenceInMinutes(
       startsAt,
-      new Date(`2018-09-${date - 1} 15:00`)
+      new Date(`2018/09/${date - 1} 15:00`)
     );
   }
 
