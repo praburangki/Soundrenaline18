@@ -34,14 +34,13 @@
       v-for="artist in artists" :key="artist.id"
       :style="{ 
         top: `${26 * artist.height}px`, 
-        height: `${26 * artist.rowSpan}px`,
-        border: `solid 1px #fff !important`
+        height: `${26 * artist.rowSpan}px`
       }"
       class="band"
       :class="artist.isFav ? 'primary' : isFirstDay ? 'info' : 'success'"
       @click="handleClick(artist)">
       <div>{{ artist.name }}</div>
-      <div>{{ artist.startsAt | formatTime }} - {{ artist.endsAt | formatTime }}</div>
+      <div v-if="artist.rowSpan > 1">{{ artist.startsAt | formatTime }}</div>
     </div>
   </div>
 </template>

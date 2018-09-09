@@ -24,7 +24,7 @@ const filterStage = (artists, stageName) =>
   artists.filter(artist => artist.stage === stageName);
 
 const handleTimes = (startsAt, endsAt) => {
-  const rowSpan = differenceInMinutes(endsAt, startsAt) / 15 + 1;
+  const rowSpan = differenceInMinutes(endsAt, startsAt) / 15;
   const hours = startsAt.getHours();
   const date = startsAt.getDate();
 

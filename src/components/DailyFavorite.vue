@@ -10,7 +10,6 @@
       </div>
       <div>
         {{ artist.startsAt | formatTime }} - {{ artist.endsAt | formatTime }} 
-        ({{ distance(artist.endsAt, artist.startsAt) }})
       </div>
     </div>
   </div>
@@ -18,18 +17,12 @@
 
 <script>
 import { parseTime } from '@/helpers/times';
-import { distanceInWordsStrict } from 'date-fns';
 
 export default {
   props: ['artists', 'day'],
   filters: {
     formatTime(time) {
       return parseTime(time);
-    }
-  },
-  methods: {
-    distance(start, end) {
-      return distanceInWordsStrict(end, start);
     }
   }
 };
