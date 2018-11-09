@@ -1,34 +1,7 @@
 import Vue from 'vue';
-import {
-  Vuetify,
-  VApp,
-  VFooter,
-  VBtn,
-  VIcon,
-  VGrid,
-  VToolbar,
-  VList,
-  VChip,
-  VTabs,
-  VCard,
-  transitions
-} from 'vuetify';
-import 'vuetify/src/stylus/app.styl';
+import Vuetify from 'vuetify/lib';
 
 Vue.use(Vuetify, {
-  components: {
-    VApp,
-    VFooter,
-    VBtn,
-    VIcon,
-    VGrid,
-    VToolbar,
-    VList,
-    VChip,
-    VTabs,
-    VCard,
-    transitions
-  },
   theme: {
     primary: '#ED1C24',
     secondary: '#424242',

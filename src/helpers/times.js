@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import format from 'date-fns/format';
 
 const fifteen = () => {
   const start = new Date('2018/9/8 15:00');

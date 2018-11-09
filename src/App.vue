@@ -1,73 +1,14 @@
 <template>
-  <v-app>
-    <v-toolbar app color="primary" dark tabs>
-      <v-toolbar-title class="appTitle">Soundrenaline 2018</v-toolbar-title>
-
-      <v-tabs
-        slot="extension"
-        v-model="tabModel"
-        grow
-        color="primary"
-        slider-color="yellow"
-      >
-        <v-tabs-slider color="black"></v-tabs-slider>
-        <v-tab href="#table">
-          <v-icon>dashboard</v-icon>
-        </v-tab>
-        <v-tab href="#list">
-          <v-icon>view_list</v-icon>
-        </v-tab>
-        <v-tab href="#favorite">
-          <v-icon>favorite</v-icon>
-        </v-tab>
-      </v-tabs>
-    </v-toolbar>
-
-    <v-content class="mb-5">
-      <v-tabs-items v-model="tabModel" touchless>
-        <v-tab-item id="table" lazy>
-          <BtnDaySwitcher />
-          <TableView />
-        </v-tab-item>
-
-        <v-tab-item id="list" lazy>
-          <BtnDaySwitcher />
-          <ListView />
-        </v-tab-item>
-
-        <v-tab-item id="favorite" lazy>
-          <FavoriteView />
-        </v-tab-item>
-      </v-tabs-items>
-    </v-content>
-  </v-app>
+  <MainView />
 </template>
 
 <script>
-import TableView from '@/components/TableView';
-import ListView from '@/components/ListView';
-import FavoriteView from '@/components/FavoriteView';
-import BtnDaySwitcher from '@/components/BtnDaySwitcher';
+const MainView = () =>
+  import(/* webpackChunkName: "main-view" */ '@/components/MainView');
 
 export default {
   components: {
-    TableView,
-    ListView,
-    FavoriteView,
-    BtnDaySwitcher
-  },
-  data() {
-    return {
-      tabModel: 'table'
-    };
+    MainView
   }
 };
 </script>
-
-<style lang="stylus" scoped>
-.appTitle {
-  font-family: 'Product Sans';
-  text-transform: uppercase;
-  margin: 0 auto;
-}
-</style>

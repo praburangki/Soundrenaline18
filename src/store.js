@@ -1,9 +1,11 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { firestore } from '@/utils/firebase';
-import { differenceInMinutes } from 'date-fns';
+import differenceInMinutes from 'date-fns/difference_in_minutes';
+import axios from 'axios';
 
 Vue.use(Vuex);
+
+const API_URL = 'https://soundrenaline18.firebaseio.com/artists.json';
 
 const A_STAGE = 'A Stage';
 const P_STAGE = 'Platinum Stage';
@@ -78,16 +80,16 @@ export default new Vuex.Store({
     },
     setFavArtists(state) {
       const favIds = [];
-      const localFav = (
-        JSON.parse(localStorage.getItem('favArtists')) || []
-      ).map(artist => {
-        artist.startsAt = new Date(artist.startsAt);
-        artist.endsAt = new Date(artist.endsAt);
+      const localFav = (JSON.parse(localStorage.getItem('favBands')) || []).map(
+        artist => {
+          artist.startsAt = new Date(artist.startsAt);
+          artist.endsAt = new Date(artist.endsAt);
 
-        favIds.push(artist.id);
+          favIds.push(artist.id);
 
-        return artist;
-      });
+          return artist;
+        }
+      );
       const filterArt = state.artists.filter(el => {
         return !favIds.includes(el.id);
       });
@@ -106,19 +108,14 @@ export default new Vuex.Store({
   },
   actions: {
     async fetchArtists({ commit }) {
-      const { docs } = await firestore
-        .collection('artists')
-        .orderBy('startsAt')
-        .get();
-
-      const artists = docs.map(doc => {
-        const { startsAt: start, endsAt: end } = doc.data();
-        const startsAt = start.toDate();
-        const endsAt = end.toDate();
+      const { data: resData } = await axios.get(API_URL);
+      const artists = Object.keys(resData).map(uid => {
+        const startsAt = new Date(resData[uid].startsAt);
+        const endsAt = new Date(resData[uid].endsAt);
         const { rowSpan, height } = handleTimes(startsAt, endsAt);
         return {
-          id: doc.id,
-          ...doc.data(),
+          id: uid,
+          ...resData[uid],
           startsAt,
           endsAt,
           rowSpan,
@@ -130,7 +127,7 @@ export default new Vuex.Store({
     toggleFav({ commit, getters }, { artist }) {
       commit('toggleFavArtist', { artist });
       const { favArtists } = getters;
-      localStorage.setItem('favArtists', JSON.stringify(favArtists));
+      localStorage.setItem('favBands', JSON.stringify(favArtists));
     }
   }
 });
